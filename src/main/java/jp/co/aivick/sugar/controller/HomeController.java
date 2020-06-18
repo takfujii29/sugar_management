@@ -12,6 +12,6 @@ public class HomeController {
 	@RequestMapping
 	public String home(@AuthenticationPrincipal User user, Model model) {
 		model.addAttribute("name", user.getUsername());
-		return "home.html";
+		return "/home";
 	}
 }
