@@ -6,13 +6,13 @@
       layout:decorate="~{layout/layout}">
 <head>
   <meta charset="UTF-8">
-  <title th:text="#{user.create}">ユーザー登録</title>
+  <title th:text="#{user_create}">ユーザー登録</title>
 </head>
 
 <body>
 
 <div layout:fragment="content">
-  <h2 th:text="#{user.create}">ユーザー登録</h2>
+  <h2 th:text="#{user_create}">ユーザー登録</h2>
 
   <form th:action="@{/signup}" method="post" th:object="${userForm}">
 
