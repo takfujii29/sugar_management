@@ -1,11 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sugar_management</title>
+  <title>Sugar Management</title>
 </head>
 <body>
-  welcome
+  <ul>
+    <li><a th:href="@{/login}" th:text="#{login}">ログイン</a></li>
+    <li><a th:href="@{'/signup'}" th:text="#{user_registration}">ユーザ登録</a></li>
+  </ul>
 </body>
 </html>
