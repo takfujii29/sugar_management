@@ -22,10 +22,6 @@ public class UserService {
 		return userDao.find(id);
 	}
 	
-	public List<User> findAll() {
-		return this.userDao.findAll();
-	}
-	
 	@Transactional
 	public User create(User user) {
 		User newUser = new User();

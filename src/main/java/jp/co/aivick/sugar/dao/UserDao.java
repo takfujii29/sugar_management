@@ -1,7 +1,5 @@
 package jp.co.aivick.sugar.dao;
 
-import java.util.List;
-
 import org.seasar.doma.Dao;
 import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
@@ -16,9 +14,6 @@ public interface UserDao {
 	
 	@Select
 	User find(String id);
-	
-	@Select
-	List<User> findAll();
 	
 	@Insert
 	int insert(User user);
