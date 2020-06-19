@@ -24,7 +24,8 @@
 
         <a
             th:unless="${#authorization.expression('isAuthenticated()')}"
-            th:href="@{/signup}">
+            th:href="@{/signup}"
+            th:text="#{user_registration}">
           ユーザ登録
         </a>
 
