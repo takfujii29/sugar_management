@@ -15,6 +15,12 @@
 
         </span>
 
+        <a
+            th:if="${#authorization.expression('isAuthenticated()')}" 
+            th:text="#{top}"
+            th:href="@{/user_product/list}">メイン画面へ
+        </a>
+
         <form
             th:if="${#authorization.expression('isAuthenticated()')}"
             th:action="@{/logout}"
