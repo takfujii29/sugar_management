@@ -12,9 +12,6 @@ import jp.co.aivick.sugar.entity.UserProductJoin;
 @Dao
 public interface UserProductJoinDao {
 	 
-//	 @Select
-//	 List<UserProductJoin> findAll();
-	 
 	 @Select
 	 List<UserProductJoin> findAllwhereUser(Integer userId);
 }

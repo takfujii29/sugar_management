@@ -15,10 +15,6 @@ public class UserProductJoinService {
 	@Autowired
 	private UserProductJoinDao userProductJoinDao;
 	
-//	public List<UserProductJoin> findAll() {
-//		return this.userProductJoinDao.findAll();
-//	}
-	
 	public List<UserProductJoin> findAllwhereUser(Integer userId) {
 		return this.userProductJoinDao.findAllwhereUser(userId);
 	}
