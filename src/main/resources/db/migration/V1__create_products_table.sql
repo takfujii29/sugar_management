@@ -1,7 +1,7 @@
 CREATE TABLE `products` (
   `product_id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `suger` float NOT NULL,
+  `sugar` float NOT NULL,
   PRIMARY KEY (`product_id`)
 ) ENGINE=InnoDB 
 DEFAULT CHARSET=utf8mb4 
