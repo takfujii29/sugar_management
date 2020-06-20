@@ -1,7 +1,5 @@
 package jp.co.aivick.sugar.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,6 +20,10 @@ public class UserService {
 		return userDao.find(id);
 	}
 	
+	public User findByLoginId(String LoginId) {
+		return userDao.findByLoginId(LoginId);
+	}
+	
 	@Transactional
 	public User create(User user) {
 		User newUser = new User();
@@ -39,4 +41,5 @@ public class UserService {
 		userDao.update(user);
 		return user;
 	}
+
 }

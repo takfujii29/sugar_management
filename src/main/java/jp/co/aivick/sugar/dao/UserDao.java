@@ -20,5 +20,7 @@ public interface UserDao {
 	
 	@Update
 	int update(User user);
-	
+
+	@Select
+	User findByLoginId(String loginId);
 }
