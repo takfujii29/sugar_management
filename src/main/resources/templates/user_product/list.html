@@ -20,7 +20,14 @@
 </head>
 
 <body>
+  
   <div layout:fragment="content">
+
+    <a
+    th:text="#{ate_register}"
+    th:href="@{/user_product/create}">食べたもの登録
+    </a>
+    
     <h2 th:text="#{sugar_intake.list}">摂取糖質一覧</h2>
     <table>
       <thead>
