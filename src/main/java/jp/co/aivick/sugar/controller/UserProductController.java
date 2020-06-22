@@ -3,6 +3,8 @@ package jp.co.aivick.sugar.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -43,8 +45,13 @@ public class UserProductController {
 	
 	private Map<Integer, String> getSelectedProducts(){
 		List<Product> productList = productService.findAll();
-		Map<Integer, String> selectMap = new HashMap<>();
-		productList.forEach(p -> selectMap.put(p.getProductId(), p.getName()));
+		HashMap<Integer, String> selectMap = productList.stream()
+														.collect(Collectors.toMap(
+																p -> p.getProductId()
+																,p ->p.getName()
+																,(oldVal,newVal) -> newVal
+																,HashMap::new
+																));
 		return selectMap;
 	}
 	
