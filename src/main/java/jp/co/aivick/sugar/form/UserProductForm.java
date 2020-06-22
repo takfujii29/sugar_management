@@ -3,6 +3,7 @@ package jp.co.aivick.sugar.form;
 import java.sql.Date;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 public class UserProductForm {
 	
@@ -11,6 +12,7 @@ public class UserProductForm {
 	@NotNull
 	private Integer productId;
 	
+	@Positive
 	@NotNull
 	private Double amount;
 	
