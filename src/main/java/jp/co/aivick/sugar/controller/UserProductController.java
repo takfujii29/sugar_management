@@ -63,7 +63,7 @@ public class UserProductController {
 		model.addAttribute("userProductForm", new UserProductForm());
 		model.addAttribute("selectedProducts", getSelectedProducts());
 
-		return "/user_product/create.html";
+		return "user_product/create.html";
 	}
 
 	@PostMapping("/create")
@@ -71,7 +71,7 @@ public class UserProductController {
 			@AuthenticationPrincipal UserDetails userDetails, Model model) {
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("selectedProducts", getSelectedProducts());
-			return "/user_product/create.html";
+			return "user_product/create.html";
 		}
 
 		User user = userService.findByLoginId(userDetails.getUsername());
