@@ -1,6 +1,6 @@
 package jp.co.aivick.sugar.controller;
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,10 +43,8 @@ public class UserProductController {
 	
 	private Map<Integer, String> getSelectedProducts(){
 		List<Product> productList = productService.findAll();
-		Map<Integer, String> selectMap = new LinkedHashMap<>();
-		for(Product product : productList) {
-			selectMap.put(product.getProductId(), product.getName());
-		}
+		Map<Integer, String> selectMap = new HashMap<>();
+		productList.forEach(p -> selectMap.put(p.getProductId(), p.getName()));
 		return selectMap;
 	}
 	
