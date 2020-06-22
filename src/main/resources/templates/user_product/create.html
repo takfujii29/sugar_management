@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="#{ate_register}">食べたもの登録</title>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+  <h2 th:text="#{ate_register}">メニュー登録</h2>
+
+  <form th:action="@{/user_product/create}" method="post" th:object="${userProductForm}" id="product">
+
+    <ul>
+      <li th:each="error: ${#fields.detailedErrors()}" th:text="${error.message}">
+    </ul>
+
+    <span th:text="#{ate_product_name}">食べた商品</span>:
+    <select name="productId">
+      <option value="">---</option>
+      <option th:each="product : ${selectedProducts}" th:value="${product.key}"
+      th:text="${product.value}" th:selected="${product.key} == *{productId}" required></option>
+    </select><br/>
+    <span th:text="#{amount}">数量</span>:<input type="number" name="amount" step="0.1" min="0" th:value="*{amount}" placeholder="食べた数（個）を入力してください" required><br/>
+    <span th:text="#{date}">日付</span>:<input type="date" name="date" th:value="*{date}" required><br/>
+    <button type="submit" th:text="#{register}">登録</button>
+  </form>
+</div>
+
+</body>
+</html>
