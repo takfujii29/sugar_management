@@ -30,30 +30,25 @@ import jp.co.aivick.sugar.service.ProductService;
 @Controller
 @RequestMapping("/user_product")
 public class UserProductController {
-	
+
 	@Autowired
 	UserProductJoinService userProductJoinService;
-	
+
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
 	ProductService productService;
-	
+
 	@Autowired
 	UserProductService userProductService;
-	
-	private Map<Integer, String> getSelectedProducts(){
+
+	private Map<Integer, String> getSelectedProducts() {
 		List<Product> productList = productService.findAll();
-		return productList.stream()
-														.collect(Collectors.toMap(
-																p -> p.getProductId()
-																,p ->p.getName()
-																,(oldVal,newVal) -> newVal
-																,HashMap::new
-																));
+		return productList.stream().collect(
+				Collectors.toMap(Product::getProductId, Product::getName));
 	}
-	
+
 	@GetMapping("/list")
 	public String index(Model model, @AuthenticationPrincipal UserDetails userDetails) {
 		User user = userService.findByLoginId(userDetails.getUsername());
@@ -61,23 +56,24 @@ public class UserProductController {
 		model.addAttribute("userProducts", userProducts);
 		return "user_product/list.html";
 	}
-	
+
 	@GetMapping("/create")
 	public String showCreate(Model model) {
-		
+
 		model.addAttribute("userProductForm", new UserProductForm());
 		model.addAttribute("selectedProducts", getSelectedProducts());
-		
+
 		return "/user_product/create.html";
 	}
-	
+
 	@PostMapping("/create")
-	public String create(@Validated UserProductForm userProductForm, BindingResult bindingResult, @AuthenticationPrincipal UserDetails userDetails, Model model) {
+	public String create(@Validated UserProductForm userProductForm, BindingResult bindingResult,
+			@AuthenticationPrincipal UserDetails userDetails, Model model) {
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("selectedProducts", getSelectedProducts());
 			return "/user_product/create.html";
 		}
-		
+
 		User user = userService.findByLoginId(userDetails.getUsername());
 		UserProduct userProduct = new UserProduct();
 		userProduct.setUserId(user.getUserId());
@@ -85,7 +81,7 @@ public class UserProductController {
 		userProduct.setAmount(userProductForm.getAmount());
 		userProduct.setDate(userProductForm.getDate());
 		userProductService.create(userProduct);
-		
+
 		return "redirect:/user_product/create";
 	}
 }
