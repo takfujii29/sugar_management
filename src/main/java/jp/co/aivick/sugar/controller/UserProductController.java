@@ -45,14 +45,13 @@ public class UserProductController {
 	
 	private Map<Integer, String> getSelectedProducts(){
 		List<Product> productList = productService.findAll();
-		HashMap<Integer, String> selectMap = productList.stream()
+		return productList.stream()
 														.collect(Collectors.toMap(
 																p -> p.getProductId()
 																,p ->p.getName()
 																,(oldVal,newVal) -> newVal
 																,HashMap::new
 																));
-		return selectMap;
 	}
 	
 	@GetMapping("/list")
