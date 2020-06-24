@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jp.co.aivick.sugar.domain.StandardValue;
 import jp.co.aivick.sugar.entity.Product;
-import jp.co.aivick.sugar.entity.StandardValue;
 import jp.co.aivick.sugar.entity.User;
 import jp.co.aivick.sugar.entity.UserProduct;
 import jp.co.aivick.sugar.entity.UserProductJoin;

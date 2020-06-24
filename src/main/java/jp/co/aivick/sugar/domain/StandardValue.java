@@ -1,4 +1,4 @@
-package jp.co.aivick.sugar.entity;
+package jp.co.aivick.sugar.domain;
 
 public class StandardValue {
 	static final Double STANDARDVALUE=300.0;
