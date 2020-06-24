@@ -30,7 +30,13 @@ public interface UserProductJoinDao {
 	 @Select
 	 List<UserProductJoin> findAllwhereUserAndDate(Integer userId, Date date);
 	 
+	 /**
+	  *一日の合計糖質を 計算する
+	  * @param userId
+	  * @param date
+	  * @return
+	  */
 	 @Select
-	UserProductJoin findByDayTotal(Integer userId, Date date);
+	 UserProductJoin findByDayTotal(Integer userId, Date date);
 
 }

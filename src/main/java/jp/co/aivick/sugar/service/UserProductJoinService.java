@@ -33,6 +33,13 @@ public class UserProductJoinService {
 	public List<UserProductJoin> findAllwhereUserAndDate(Integer userId, Date date) {
 		return this.userProductJoinDao.findAllwhereUserAndDate(userId, date);
 	}
+	
+	 /**
+	  *一日の合計糖質を 計算する
+	  * @param userId
+	  * @param date
+	  * @return
+	  */
 	public UserProductJoin findByDayTotal(Integer userId, Date date) {
 		return this.userProductJoinDao.findByDayTotal(userId, date);
 	}
