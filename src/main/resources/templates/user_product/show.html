@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="#{sugar_intake.list}">摂取糖質リスト</title>
+  <link th:href="@{/css/show.css}" rel="stylesheet" type="text/css">
+  <style>
+    table {
+      border: 1px solid gray;
+    }
+
+    table th, table td {
+      border: 1px solid gray;
+    }
+  </style>
+</head>
+
+<body>
+  
+  <div layout:fragment="content">
+    
+    <h2 class="title" th:text="#{show}">詳細</h2>
+    <div class="data">
+      <h3 th:text="#{date}">日付</h3>
+      <h3 th:text="${dayTotal.date}"></h3>
+    </div>
+    <div class="data">
+      <h3 th:text="#{total_sugar}">総糖質</h3>
+      <h3 th:text="${dayTotal.totalSugar} + ' ' + g"></h3>
+    </div>
+    <div class="data">
+      <h3 th:text="#{standard_value}">基準値</h3>
+      <h3 th:text="${standardValue} + ' ' + g"></h3>
+    </div>
+    <table>
+      <thead>
+      <tr>
+        <th th:txet="#{product}">商品</th>
+        <th th:text="#{amount}">数量</th>
+        <th th:text="#{sugar_intake}">摂取糖質</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="show : ${showList}" th:object="${show}">
+        <td th:text="*{name}"></td>
+        <td th:text="*{amount}"></td>
+        <td th:text="*{sugar} + ' ' + g"></td>
+      </tr>
+      </tbody>
+    </table>
+</div>
+</body>

@@ -1,10 +1,8 @@
 package jp.co.aivick.sugar.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -17,11 +15,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jp.co.aivick.sugar.domain.StandardValue;
 import jp.co.aivick.sugar.entity.Product;
 import jp.co.aivick.sugar.entity.User;
 import jp.co.aivick.sugar.entity.UserProduct;
 import jp.co.aivick.sugar.entity.UserProductJoin;
 import jp.co.aivick.sugar.form.UserProductForm;
+import jp.co.aivick.sugar.form.UserProductShowForm;
 import jp.co.aivick.sugar.service.UserProductJoinService;
 import jp.co.aivick.sugar.service.UserProductService;
 import jp.co.aivick.sugar.service.UserService;
@@ -83,5 +83,19 @@ public class UserProductController {
 		userProductService.create(userProduct);
 
 		return "redirect:/user_product/create";
+	}
+	
+	@GetMapping("/show")
+	public String show(UserProductShowForm userProductShowForm, Model model, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return "redirect:/user_product/list.html";
+		}
+		List<UserProductJoin> showList = userProductJoinService.findAllwhereUserAndDate(userProductShowForm.getUserId(), userProductShowForm.getDate());
+		UserProductJoin dayTotal = userProductJoinService.findByDayTotal(userProductShowForm.getUserId(), userProductShowForm.getDate());
+		Double standardValue = StandardValue.getStandardvalue();
+		model.addAttribute("showList", showList);
+		model.addAttribute("dayTotal", dayTotal);
+		model.addAttribute("standardValue", standardValue);
+		return "user_product/show.html";
 	}
 }

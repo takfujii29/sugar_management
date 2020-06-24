@@ -1,5 +1,6 @@
 package jp.co.aivick.sugar.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,32 @@ public class UserProductJoinService {
 	@Autowired
 	private UserProductJoinDao userProductJoinDao;
 	
+	/**
+	 * userIdが一致するデータを全て返す
+	 * @param userId
+	 * @return
+	 */
 	public List<UserProductJoin> findAllwhereUser(Integer userId) {
 		return this.userProductJoinDao.findAllwhereUser(userId);
+	}
+	/**
+	 * dateとuserIdが一致するproductをListで返す
+	 * @param userId
+	 * @param date
+	 * @return
+	 */
+	public List<UserProductJoin> findAllwhereUserAndDate(Integer userId, Date date) {
+		return this.userProductJoinDao.findAllwhereUserAndDate(userId, date);
+	}
+	
+	 /**
+	  *一日の合計糖質を 計算する
+	  * @param userId
+	  * @param date
+	  * @return
+	  */
+	public UserProductJoin findByDayTotal(Integer userId, Date date) {
+		return this.userProductJoinDao.findByDayTotal(userId, date);
 	}
 
 }
