@@ -13,7 +13,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.aivick.sugar.domain.StandardValue;
 import jp.co.aivick.sugar.entity.Product;
@@ -55,6 +58,17 @@ public class UserProductController {
 		List<UserProductJoin> userProducts = userProductJoinService.findAllwhereUser(user.getUserId());
 		model.addAttribute("userProducts", userProducts);
 		return "user_product/list.html";
+	}
+	
+	@RequestMapping("/calc")
+	@ResponseBody
+	public Double calc(@RequestParam String selectedProductId, @RequestParam Double amount) {
+		if(selectedProductId != null && amount != null) {
+			Product product = productService.findBy(selectedProductId);
+			Double sugar = product.getSugar();
+			return sugar * amount;
+		}
+		return 0.0;
 	}
 
 	@GetMapping("/create")

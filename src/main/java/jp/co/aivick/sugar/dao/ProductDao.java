@@ -12,6 +12,18 @@ import jp.co.aivick.sugar.entity.Product;
 @Dao
 public interface ProductDao {
 	
+	/**
+	 * 全てのproductを返す
+	 * @return List<Product>
+	 */
 	@Select
 	List<Product> findAll();
+	
+	/**
+	 * viewから渡されたidを使ってproductを返す
+	 * @param selectedProductId
+	 * @return Product
+	 */
+	@Select
+	Product findBy(String selectedProductId);
 }

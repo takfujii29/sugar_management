@@ -14,7 +14,20 @@ public class ProductService {
 	@Autowired
 	private ProductDao productDao;
 	
+	/**
+	 * 全てのproductを返す
+	 * @return List<Product>
+	 */
 	public List<Product> findAll() {
 		return this.productDao.findAll();
+	}
+	
+	/**
+	 * viewから渡されたidを使ってproductを検索する
+	 * @param selectedProductId
+	 * @return Product
+	 */
+	public Product findBy(String selectedProductId) {
+		return this.productDao.findBy(selectedProductId);
 	}
 }
