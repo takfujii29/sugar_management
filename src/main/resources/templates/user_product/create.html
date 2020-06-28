@@ -7,48 +7,62 @@
 <head>
   <meta charset="UTF-8">
   <title th:text="#{ate_register}">食べたもの登録</title>
+  <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+  <link th:href="@{/css/reset.css}" rel="stylesheet" type="text/css">
 </head>
 
 <body>
+  
+  <div layout:fragment="content">
+    <div class="main">
+      <div class="title">
+        <h2 th:text="#{ate_register}">メニュー登録</h2>
+      </div>
+      <div class="result">
+        <h3>登録糖質</h3>
+        <span id="result">0 g</span>
+      </div>
 
-<div layout:fragment="content">
-  <h2 th:text="#{ate_register}">メニュー登録</h2>
+      <form th:action="@{/user_product/create}" method="post" th:object="${userProductForm}" id="product">
 
-  <form th:action="@{/user_product/create}" method="post" th:object="${userProductForm}" id="product">
+        <ul>
+          <li th:each="error: ${#fields.detailedErrors()}" th:text="${error.message}">
+        </ul>
+        <div class="input">
+          <span th:text="#{ate_product_name}">食べた商品</span> : 
+          <select name="productId" id="productId" onchange='changeSelectBox()'>
+            <option value="">---</option>
+            <option th:each="product : ${selectedProducts}" th:value="${product.key}"
+            th:text="${product.value}" th:selected="${product.key} == *{productId}" required ></option>
+          </select><br/>
+        </div>
+        <div class="input">
+          <span th:text="#{amount}">数量</span> : <input type="number" name="amount" id="amount" step="0.1" min="0" th:value="*{amount}" placeholder="食べた数（個）を入力してください" required onchange='changeSelectBox()'><br/>
+        </div>
+        <div class="input">
+          <span th:text="#{date}">日付</span> : <input type="date" name="date" th:value="*{date}" required>
+        </div>
+        <button type="submit" th:text="#{register}">登録</button>
+      </form>
 
-    <ul>
-      <li th:each="error: ${#fields.detailedErrors()}" th:text="${error.message}">
-    </ul>
-    
-    <span th:text="#{ate_product_name}">食べた商品</span>:
-    <select name="productId" id="productId" onchange='changeSelectBox()'>
-      <option value="">---</option>
-      <option th:each="product : ${selectedProducts}" th:value="${product.key}"
-      th:text="${product.value}" th:selected="${product.key} == *{productId}" required></option>
-    </select><br/>
-    <span th:text="#{amount}">数量</span>:<input type="number" name="amount" id="amount" step="0.1" min="0" th:value="*{amount}" placeholder="食べた数（個）を入力してください" required onchange='changeSelectBox()'><br/>
-    <span th:text="#{date}">日付</span>:<input type="date" name="date" th:value="*{date}" required><br/>
-    <button type="submit" th:text="#{register}">登録</button>
-  </form>
 
-  <div class="result" id="result">0</div>
+      <script type="text/javascript">
+        function changeSelectBox() {
+          var selectedProductId = document.getElementById("productId").value;
+          var amount = document.getElementById("amount").value;
+          var url = `/user_product/calc?selectedProductId=${selectedProductId}&amount=${amount}`;
 
-  <script type="text/javascript">
-    function changeSelectBox() {
-      var selectedProductId = document.getElementById("productId").value;
-      var amount = document.getElementById("amount").value;
-      var url = `/user_product/calc?selectedProductId=${selectedProductId}&amount=${amount}`;
-
-      fetch(url)
-      .then(response => {
-      return response.json();
-      }).then(result => {
-        document.getElementById("result").innerText = Math.round(result*10)/10;
-        }
-      );
-    };
-  </script>
-</div>
+          fetch(url)
+          .then(response => {
+          return response.json();
+          }).then(result => {
+            document.getElementById("result").innerText = Math.round(result*10)/10 + " g";
+            }
+          );
+        };
+      </script>
+    </div>
+  </div>
 
 </body>
 </html>

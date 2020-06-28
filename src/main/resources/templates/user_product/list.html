@@ -7,50 +7,41 @@
 <head>
   <meta charset="UTF-8">
   <title th:text="#{sugar_intake.list}">摂取糖質リスト</title>
-
-  <style>
-    table {
-      border: 1px solid gray;
-    }
-
-    table th, table td {
-      border: 1px solid gray;
-    }
-  </style>
+  <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+  <link th:href="@{/css/reset.css}" rel="stylesheet" type="text/css">
 </head>
 
 <body>
   
   <div layout:fragment="content">
+    
+    <div class="main">
+      <div class="title">
+        <h2 th:text="#{sugar_intake.list}">摂取糖質一覧</h2>
+      </div>
 
-    <a
-    th:text="#{ate_register}"
-    th:href="@{/user_product/create}">食べたもの登録
-    </a>
-    
-    <h2 th:text="#{sugar_intake.list}">摂取糖質一覧</h2>
-    
-    <table>
-      <thead>
-      <tr>
-        <th th:text="#{date}">日付</th>
-        <th th:text="#{sugar_intake}">摂取糖質</th>
-        <th></th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="userProduct : ${userProducts}" th:object="${userProduct}">
-        <td th:text="*{date}"></td>
-        <td th:text="*{totalSugar} + ' ' + g"></td>
-        <td>
-          <form th:action="@{'/user_product/show'}" method="get">
-            <input type="hidden" name="userId" th:value="*{userId}">
-            <input type="hidden" name="date" th:value="*{date}">
-            <button type="submit" th:text="#{show}">詳細</button>
-          </form>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-</div>
+      <table>
+        <thead>
+          <tr>
+            <th th:text="#{date}">日付</th>
+            <th th:text="#{sugar_intake}">摂取糖質</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="userProduct : ${userProducts}" th:object="${userProduct}">
+            <td th:text="*{date}"></td>
+            <td th:text="*{totalSugar} + ' ' + g"></td>
+            <td>
+              <form th:action="@{'/user_product/show'}" method="get">
+                <input type="hidden" name="userId" th:value="*{userId}">
+                <input type="hidden" name="date" th:value="*{date}">
+                <button type="submit" th:text="#{show}" clas="show_button">詳細</button>
+              </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </body>
