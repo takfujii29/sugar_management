@@ -17,7 +17,7 @@
           th:text="|${#authentication.principal.username}さん|"
           >
         </span>
-        
+
         <a
           th:if="${#authorization.expression('isAuthenticated()')}" 
           th:text="#{top}"
@@ -35,11 +35,16 @@
           <button type="submit" th:text="#{logout}">ログアウト</button>
         </form>
 
+        <a 
+          th:unless="${#authorization.expression('isAuthenticated()')}"
+          th:href="@{/login}" 
+          th:text="#{login}">ログイン
+        </a>
+
         <a
           th:unless="${#authorization.expression('isAuthenticated()')}"
           th:href="@{/signup}"
-          th:text="#{user_registration}">
-          ユーザー登録
+          th:text="#{user_registration}">ユーザー登録
         </a>
 
       </header>
