@@ -16,21 +16,21 @@
   <div layout:fragment="content">
     <div class="main">
       <div class="title">
-        <h2 th:text="${dayTotal.date}"></h2>
+        <h2 th:text="${dayTotal.date} + に食べた物"></h2>
       </div>
       <div class="data">
         <div class="total_sugar">
-          <h3 th:text="#{total_sugar}">総糖質</h3>
+          <h3 class="subtitle" th:text="#{total_sugar}">総糖質</h3>
           <h3 th:text="${dayTotal.totalSugar}" id="totalSugar"></h3>
           <!-- <h3 th:text="${dayTotal.totalSugar} + ' ' + g"></h3> -->
         </div>
         <div class="standard_value">
-          <h3 th:text="#{standard_value}">基準値</h3>
+          <h3 class="subtitle" th:text="#{standard_value}">基準値</h3>
           <h3 th:text="${standardValue}" id="standardValue"></h3>
           <!-- <h3 th:text="${standardValue} + ' ' + g"></h3> -->
         </div>
         <div class="rate"  >
-          <h3>一日の摂取割合</h3>
+          <h3 class="subtitle">一日の摂取割合</h3>
           <h3 id="rate"></h3>
         </div>
       </div>

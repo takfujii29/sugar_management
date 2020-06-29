@@ -20,6 +20,10 @@
 						<div th:if="${param.error}">ログインIDかパスワードが間違っています。</div>
 						<div th:if="${param.logout}">ログアウトしました。</div>
 
+						<div class="title">
+							<h2 th:text="#{login}">ログイン</h2>
+						</div>
+
 						<form th:action="@{/login}" method="post">
 							<div class="columns is-centered">
 								<div class="column is-5-tablet is-4-desktop is-3-widescreen">
